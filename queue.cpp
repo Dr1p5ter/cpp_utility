@@ -1,53 +1,38 @@
 #include <iostream>
-#include <string>
+#include <array>
 
-/* This class will be the container used for the rest of the implementation
- * of the Queue class. Until I have an idea of how to make the nodes universal,
- * it will remain here as a placeholder.
- *
- * TODO : Remove when universal object has been implemented.
- *
+/* This class is for node handeling and allows for the frame work of working
+ * with multiple data structures. This is completely dynamic so nothing should
+ * be changed inside of this class nore should it have any methods.
  */
 
-class Node
+template <typename T> class Node
 {
-  private:
-    Node* nextNode;
-    std::string* name;
-    int age;
   public:
-    Node(std::string* name, int age)
-    {
-      this.nextNode = nullptr;
-      this.name = nullptr;
-      this.age = age;
-    };
-    void setNextNode(Node* newNextNode) { this.nextNode = newNextNode; };
-    void setName(std::string* newName) { this.name = newName; };
-    void setAge(int newAge) { this.age = newAge; };
-    Node* getNextNode(void) { return this.nextNode; };
-    std::string* getName(void) { return this.name; };
-    int getAge(void) { return this.age; };
+    T* data;
+    Node<T>* next;
 }; /* Class :: Node */
 
-/* This class is my implementation of a FIFO stack known as a queue. Current
- * universal use is not available so use the Node class provided above for
- * now.
- *
- * TODO : Update once a universal object keyward has been found.
- *
+/* This class is my implementation of a FIFO stack known as a queue. This can
+ * be used with any data type and is currently being tested.
  */
 
-class Queue
+template <typename T> class Queue
 {
   private:
-    Node* head;
+    Node<T>* head;
   public:
-    void enqueue(Node* newNode);
-    Node* dequeue(void);
+    void enqueue(T* dataToEnqueue);
+    T* dequeue(void);
     bool isEmpty(void);
     int size(void);
-    Node* peek(void);
+    T* peek(void);
+
+    // default constructor
+    Queue()
+    {
+      this->head = nullptr;
+    }
 }; /* Class :: Queue */
 
 /* This method will insert an item at the end of the queue and return a void
@@ -55,21 +40,62 @@ class Queue
  * happen.
  */
 
-void Queue::enqueue(Node* newNode)
+template <typename T> void Queue<T>::enqueue(T* dataToEnqueue)
 {
-  // TODO : implement this method
-  std::cout << "enqueue() is used" << std::endl;
-  return void;
+  /* Allocates memory for data node */
+
+  Node<T>* newNode = new Node<T>;
+  if (!newNode)
+  {
+    std::cout << "Error: out of memory" << std::endl;
+    exit(1);
+  }
+  else
+  {
+    newNode->data = dataToEnqueue;
+    newNode->next = nullptr;
+  }
+
+  /* Enqueues the node into the queue */
+
+  if (this->head == nullptr)
+  {
+    this->head = newNode;
+  }
+  else
+  {
+    Node<T>* findEnd = this->head;
+    while (findEnd->next != nullptr) { findEnd = findEnd->next; }
+    findEnd->next = newNode;
+  }
+
+  return;
 } /* enqueue() */
 
 /* This method will remove the item in front of the queue and return it. If the
  * queue is empty, nothing will be removed and the method will return null.
  */
 
-Node* Queue::dequeue(void)
+template <typename T> T* Queue<T>::dequeue(void)
 {
-  // TODO : implement this method
-  std::cout << "dequeue() is used" << std::endl;
+  if (!isEmpty())
+  {
+    T* info = this->head->data;
+
+    /* Push up the queue after the dequeue */
+
+    Node<T>* temp = this->head;
+    if (temp->next == nullptr)
+    {
+      this->head = nullptr;
+    }
+    else
+    {
+      this->head = this->head->next;
+    }
+    delete temp;
+    return info;
+  }
   return nullptr;
 } /* dequeue() */
 
@@ -77,43 +103,68 @@ Node* Queue::dequeue(void)
  * boolean equivalent. True for an empty queue; False for a non-empty queue.
  */
 
-bool Queue::isEmpty(void)
+template <typename T> bool Queue<T>::isEmpty(void)
 {
-  // TODO : implement this method
-  std::cout << "isEmpty() is used" << std::endl;
-  return false;
+  return (this->head == nullptr);
 } /* isEmpty() */
 
 /* This method will traverse the entire queue and return the queue size. If the
- * queue is empty, a 0 will be returned and a memory error will return -1.
+ * queue is empty, a 0 will be returned.
  */
 
-int Queue::size(void)
+template <typename T> int Queue<T>::size(void)
 {
-  // TODO : implement this method
-  std::cout << "size() is used" << std::endl;
-  return -1;
+  /* Check if there is anything inside of the queue */
+  if (!isEmpty())
+  {
+    int n = 1;
+    Node<T>* findEnd = this->head;
+    while (findEnd->next != nullptr)
+    {
+      n += 1;
+      findEnd = findEnd->next;
+    }
+    return n;
+  }
+  return 0;
 } /* size() */
 
 /* This method will peek at the first object in the queue and return it without
  * dequeueing the object. If the queue is empty, return null.
  */
 
-Node* Queue::peek(void)
+template <typename T> T* Queue<T>::peek(void)
 {
-  // TODO : implement this method
-  std::cout << "peek() is used" << std::endl;
-  return nullptr;
+  if (this->head == nullptr)
+  {
+    return nullptr;
+  }
+  return this->head->data;
 } /* peek() */
 
 int main()
 {
-  Queue queue;
-  Node node = Node(nullptr, 0);
-  queue.enqueue(nullptr);
-  queue.dequeue();
-  queue.isEmpty();
-  queue.size();
-  queue.peek();
+  Queue<int>* queue = new Queue<int>;
+  int* myNum = new int[5];
+  myNum[0] = 0;
+  myNum[1] = 1;
+  myNum[2] = 2;
+  myNum[3] = 3;
+  myNum[4] = 4;
+  (*queue).enqueue(&myNum[0]);
+  (*queue).enqueue(&myNum[1]);
+  (*queue).enqueue(&myNum[2]);
+  (*queue).enqueue(&myNum[3]);
+  (*queue).enqueue(&myNum[4]);
+  std::cout << "size of queue: " << (*queue).size() << std::endl;
+  (*queue).dequeue();
+  (*queue).dequeue();
+  (*queue).dequeue();
+  (*queue).dequeue();
+  (*queue).dequeue();
+  std::cout << "is queue empty: " << (*queue).isEmpty() << std::endl;
+  delete queue;
+  delete[] myNum;
+  myNum = nullptr;
   return 0;
 } /* main() */
