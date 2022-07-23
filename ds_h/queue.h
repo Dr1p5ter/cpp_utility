@@ -27,6 +27,6 @@ template <typename T> class Queue
 
 }; /* Class :: Queue */
 
-#include "../data_structure_cpp/queue.cpp"
+#include "../ds_cpp/queue.cpp"
 
 #endif

@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../data_structure_h/queue.h"
+#include "../ds_h/queue.h"
 
 /* This is the constructor for the Queue class. This will do nothing other than
  * initialize the head pointer to a null pointer so the methods can do the all
