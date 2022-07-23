@@ -1,39 +1,15 @@
 #include <iostream>
-#include <array>
+#include "queue.h"
 
-/* This class is for node handeling and allows for the frame work of working
- * with multiple data structures. This is completely dynamic so nothing should
- * be changed inside of this class nore should it have any methods.
+/* This is the constructor for the Queue class. This will do nothing other than
+ * initialize the head pointer to a null pointer so the methods can do the all
+ * the work.
  */
 
-template <typename T> class Node
+template <typename T> Queue<T>::Queue(void)
 {
-  public:
-    T* data;
-    Node<T>* next;
-}; /* Class :: Node */
-
-/* This class is my implementation of a FIFO stack known as a queue. This can
- * be used with any data type and is currently being tested.
- */
-
-template <typename T> class Queue
-{
-  private:
-    Node<T>* head;
-  public:
-    void enqueue(T* dataToEnqueue);
-    T* dequeue(void);
-    bool isEmpty(void);
-    int size(void);
-    T* peek(void);
-
-    // default constructor
-    Queue()
-    {
-      this->head = nullptr;
-    }
-}; /* Class :: Queue */
+  this->head = nullptr;
+} /* Queue() */
 
 /* This method will insert an item at the end of the queue and return a void
  * value once finished. If there is an error or the node is null, nothing will
@@ -44,7 +20,7 @@ template <typename T> void Queue<T>::enqueue(T* dataToEnqueue)
 {
   /* Allocates memory for data node */
 
-  Node<T>* newNode = new Node<T>;
+  NodeQueue<T>* newNode = new NodeQueue<T>;
   if (!newNode)
   {
     std::cout << "Error: out of memory" << std::endl;
@@ -64,12 +40,10 @@ template <typename T> void Queue<T>::enqueue(T* dataToEnqueue)
   }
   else
   {
-    Node<T>* findEnd = this->head;
+    NodeQueue<T>* findEnd = this->head;
     while (findEnd->next != nullptr) { findEnd = findEnd->next; }
     findEnd->next = newNode;
   }
-
-  return;
 } /* enqueue() */
 
 /* This method will remove the item in front of the queue and return it. If the
@@ -80,11 +54,10 @@ template <typename T> T* Queue<T>::dequeue(void)
 {
   if (!isEmpty())
   {
-    T* info = this->head->data;
-
     /* Push up the queue after the dequeue */
 
-    Node<T>* temp = this->head;
+    T* info = this->head->data;
+    NodeQueue<T>* temp = this->head;
     if (temp->next == nullptr)
     {
       this->head = nullptr;
@@ -93,7 +66,6 @@ template <typename T> T* Queue<T>::dequeue(void)
     {
       this->head = this->head->next;
     }
-    delete temp;
     return info;
   }
   return nullptr;
@@ -118,7 +90,7 @@ template <typename T> int Queue<T>::size(void)
   if (!isEmpty())
   {
     int n = 1;
-    Node<T>* findEnd = this->head;
+    NodeQueue<T>* findEnd = this->head;
     while (findEnd->next != nullptr)
     {
       n += 1;
@@ -142,29 +114,3 @@ template <typename T> T* Queue<T>::peek(void)
   return this->head->data;
 } /* peek() */
 
-int main()
-{
-  Queue<int>* queue = new Queue<int>;
-  int* myNum = new int[5];
-  myNum[0] = 0;
-  myNum[1] = 1;
-  myNum[2] = 2;
-  myNum[3] = 3;
-  myNum[4] = 4;
-  (*queue).enqueue(&myNum[0]);
-  (*queue).enqueue(&myNum[1]);
-  (*queue).enqueue(&myNum[2]);
-  (*queue).enqueue(&myNum[3]);
-  (*queue).enqueue(&myNum[4]);
-  std::cout << "size of queue: " << (*queue).size() << std::endl;
-  (*queue).dequeue();
-  (*queue).dequeue();
-  (*queue).dequeue();
-  (*queue).dequeue();
-  (*queue).dequeue();
-  std::cout << "is queue empty: " << (*queue).isEmpty() << std::endl;
-  delete queue;
-  delete[] myNum;
-  myNum = nullptr;
-  return 0;
-} /* main() */

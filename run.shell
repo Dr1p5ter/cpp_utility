@@ -1,3 +1,3 @@
-g++ queue.cpp -std=c++17 -o prog
+g++ main.cpp queue.h -std=c++17 -o prog
 ./prog
 rm ./prog
