@@ -34,6 +34,10 @@ refresh:
 	git add .
 	git status
 
+.SILENT:
+commit:
+	git commit -m \"$(DESC)\"
+
 edit-help:
 	@echo "Use ctr + v && ctr + i to get indents"
 
