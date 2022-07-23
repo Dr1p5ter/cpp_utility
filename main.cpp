@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "queue.h"
+#include "data_structure_h/queue.h"
 
 using namespace std;
 
