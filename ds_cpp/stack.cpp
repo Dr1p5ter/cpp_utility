@@ -8,6 +8,7 @@
 
 template <typename T> Stack<T>::Stack(void)
 {
+  this->top = nullptr;
 } /* Stack() */
 
 /* This method will insert the data at the top of the stack and then will
@@ -16,6 +17,7 @@ template <typename T> Stack<T>::Stack(void)
 
 template <typename T> void Stack<T>::push(T* dataToPush)
 {
+  // TODO : finish implementation
 } /* push() */
 
 /* This method will remove the data at the top of the stack and then return the
@@ -24,6 +26,7 @@ template <typename T> void Stack<T>::push(T* dataToPush)
 
 template <typename T> T* Stack<T>::pop(void)
 {
+  // TODO : finish implementation
   return nullptr;
 } /* pop() */
 
@@ -33,7 +36,7 @@ template <typename T> T* Stack<T>::pop(void)
 
 template <typename T> bool Stack<T>::isEmpty(void)
 {
-  return false;
+  return (this->top == nullptr);
 } /* isEmpty() */
 
 /* This method will return the size of the stack as an int after traversing the
@@ -42,7 +45,18 @@ template <typename T> bool Stack<T>::isEmpty(void)
 
 template <typename T> int Stack<T>::size(void)
 {
-  return -1;
+  if (!isEmpty())
+  {
+    int n = 1;
+    NodeStack<T>* findEnd = this->top;
+    while (findEnd->next != nullptr)
+    {
+      n += 1;
+      findEnd = findEnd->next;
+    }
+    return n;
+  }
+  return 0;
 } /* size() */
 
 /* This method will return the data at the top of the stack without removing it
@@ -51,6 +65,6 @@ template <typename T> int Stack<T>::size(void)
 
 template <typename T> T* Stack<T>::peek(void)
 {
-  return nullptr;
+  return this->top->data;
 } /* peek() */
 

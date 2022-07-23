@@ -66,6 +66,11 @@ template <typename T> T* Queue<T>::dequeue(void)
     {
       this->head = this->head->next;
     }
+
+    /* Removes node dynamically & return info*/
+
+    delete temp;
+    temp = nullptr;
     return info;
   }
   return nullptr;
