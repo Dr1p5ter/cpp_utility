@@ -1,5 +1,5 @@
 # Information
-This repository is for use in implimenting data structures of any kind. I want
+This repository is for use in implimenting data structures and algorithms. I want
 to make this as open as possible so I can learn and share my discoveries. If
 you want to contribute, feel free to make a merge request and I will be happy
 to take a look.
