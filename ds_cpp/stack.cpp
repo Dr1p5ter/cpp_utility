@@ -17,7 +17,31 @@ template <typename T> Stack<T>::Stack(void)
 
 template <typename T> void Stack<T>::push(T* dataToPush)
 {
-  // TODO : finish implementation
+  /* Allocates memory for data node */
+
+  NodeStack<T>* newNode = new NodeStack<T>;
+  if (!newNode)
+  {
+    std::cout << "Error: out of memory" << std:endl;
+    exit(1);
+  }
+  else
+  {
+    newNode->data = dataToEnqueue;
+    newNode->next = nullptr;
+  }
+
+  /* pushes the node into the queue */
+
+  if (this->top == nullptr)
+  {
+    this->top = newNode;
+  }
+  else
+  {
+    newNode->next = this->top;
+    this->top = newNode;
+  }
 } /* push() */
 
 /* This method will remove the data at the top of the stack and then return the
@@ -26,7 +50,25 @@ template <typename T> void Stack<T>::push(T* dataToPush)
 
 template <typename T> T* Stack<T>::pop(void)
 {
-  // TODO : finish implementation
+  if (!isEmpty())
+  {
+    T* info = this->top->data;
+    NodeStack<T>* temp = this->top;
+    if (this->top->next == nullptr)
+    {
+      this->top = nullptr;
+    }
+    else
+    {
+      this->top = this->top->next;
+    }
+
+    /* Removes node dynamically & return info */
+
+    delete temp;
+    temp = nullptr;
+    return info;
+  }
   return nullptr;
 } /* pop() */
 
