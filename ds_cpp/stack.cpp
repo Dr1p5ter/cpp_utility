@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "..ds_h/stack.h"
+#include "../ds_h/stack.h"
 
 /* This is the constructor for the Stack class. This will provide the necessary
  * set up for the rest of the implementation.
@@ -22,12 +22,12 @@ template <typename T> void Stack<T>::push(T* dataToPush)
   NodeStack<T>* newNode = new NodeStack<T>;
   if (!newNode)
   {
-    std::cout << "Error: out of memory" << std:endl;
+    std::cout << "Error: out of memory" << std::endl;
     exit(1);
   }
   else
   {
-    newNode->data = dataToEnqueue;
+    newNode->data = dataToPush;
     newNode->next = nullptr;
   }
 

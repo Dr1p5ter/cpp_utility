@@ -1,6 +1,7 @@
 #include <iostream>
 
-#include "ds_h/*.h"
+#include "ds_h/queue.h"
+#include "ds_h/stack.h"
 
 using namespace std;
 
