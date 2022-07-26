@@ -3,7 +3,7 @@
 [![GitHub stars](https://img.shields.io/github/stars/mmakuraren/cpp_utility.svg?style=social&label=Star&maxAge=2592000)](https://GitHub.com/mmakuraren/cpp_utility/stargazers/)
 [![GitHub forks](https://img.shields.io/github/forks/mmakuraren/cpp_utility.svg?style=social&label=Fork&maxAge=2592000)](https://GitHub.com/mmakuraren/cpp_utility/network/)
 [![GitHub watchers](https://img.shields.io/github/watchers/mmakuraren/cpp_utility.svg?style=social&label=Watch&maxAge=2592000)](https://GitHub.com/mmakuraren/cpp_utility/watchers/)
-[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
+[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/mmakuraren/cpp_utility/blob/master/LICENSE)
 
 This package includes non-native tools for C++ that I plan to use as a side project. Everything released from this repository from each change will include a fully tested implementation. If there is a bug let me know. Be familiar with the information in the comments and the contents of this file to understand the pros/cons of the data structures or algorithms. Some information that will be useful are a few of the folder abreviations. 'ds_' stands for data structures & 'algo_' stands for algorithms.
 
