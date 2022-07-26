@@ -31,12 +31,8 @@ queue.cpp and queue.h in the folders. Any questions? Contact me and I will get
 to you as soon as possible.
 
 # Contact Information
-Name: Matthew McLaren
+Name: Matthew McLaren  
 Email: wildcatdud@gmail.com
-
-# Liscense
-As included in the repository, we use the unlicense. For any questions
-please to this link [here](https://unlicense.org) for more information.
 
 # Special Thanks
 I wanted to give credit to my layout of this README file to [Naereen](https://github.com/Naereen/)
