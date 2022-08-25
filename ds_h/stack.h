@@ -1,7 +1,7 @@
 #ifndef STACK_H
 #define STACK_H
 
-template <typename T> class NodeStack
+template <typename T> struct NodeStack
 {
 
   public:

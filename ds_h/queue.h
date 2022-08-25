@@ -1,7 +1,7 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
-template <typename T> class NodeQueue
+template <typename T> struct NodeQueue
 {
 
   public:
