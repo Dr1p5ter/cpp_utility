@@ -5,8 +5,8 @@ template <typename T> struct NodeStack
 {
 
   public:
-    T* data;
-    NodeStack<T>* next;
+    T* _data;
+    NodeStack<T>* _next;
 
 }; /* Class :: NodeStack */
 
@@ -14,7 +14,7 @@ template <typename T> class Stack
 {
 
   private:
-    NodeStack<T>* top;
+    NodeStack<T>* _top;
 
   public:
     void push(T* dataToPush);
@@ -24,6 +24,7 @@ template <typename T> class Stack
     T* peek(void);
 
     Stack();
+    ~Stack();
 
 }; /* Class :: Stack */
 
