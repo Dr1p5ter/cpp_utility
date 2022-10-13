@@ -28,6 +28,4 @@ template <typename T> class Stack
 
 }; /* Class :: Stack */
 
-#include "../ds_cpp/stack.cpp"
-
 #endif

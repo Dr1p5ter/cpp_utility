@@ -5,8 +5,8 @@ template <typename T> struct NodeQueue
 {
 
   public:
-    T* data;
-    NodeQueue<T>* next;
+    T* _data;
+    NodeQueue<T>* _next;
 
 }; /* Class :: NodeQueue */
 
@@ -14,7 +14,7 @@ template <typename T> class Queue
 {
 
   private:
-    NodeQueue<T>* head;
+    NodeQueue<T>* _head;
 
   public:
     void enqueue(T* dataToEnqueue);
@@ -24,9 +24,8 @@ template <typename T> class Queue
     T* peek(void);
 
     Queue();
+    ~Queue();
 
 }; /* Class :: Queue */
-
-#include "../ds_cpp/queue.cpp"
 
 #endif

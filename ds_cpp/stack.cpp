@@ -1,5 +1,4 @@
 #include <iostream>
-
 #include "../ds_h/stack.h"
 
 /* This is the constructor for the Stack class. This will provide the necessary

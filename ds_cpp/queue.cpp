@@ -6,43 +6,62 @@
  * the work.
  */
 
-template <typename T> Queue<T>::Queue(void)
+template <typename T>
+Queue<T>::Queue( void )
 {
   this->head = nullptr;
 } /* Queue() */
+
+/* This is the deconstructor for the Queue class. This will do remove everything and delete any
+ * memory made from the object.
+ */
+
+template <typename T>
+Queue<T>::~Queue( void )
+{
+  while ( !isEmpty() )
+  {
+    NodeQueue<T> * delNode = this->_head;
+    T * delData = this->_head->_data;
+    this->_head = this->_head->_next;
+    delete delNode;
+    delete delData;
+  }
+} /* ~Queue() */
 
 /* This method will insert an item at the end of the queue and return a void
  * value once finished. If there is an error or the node is null, nothing will
  * happen.
  */
 
-template <typename T> void Queue<T>::enqueue(T* dataToEnqueue)
+template <typename T>
+void Queue<T>::enqueue( T * dataToEnqueue )
 {
   /* Allocates memory for data node */
 
-  NodeQueue<T>* newNode = new NodeQueue<T>;
-  if (!newNode)
+  NodeQueue<T> * newNode = new NodeQueue<T>;
+  if ( !newNode )
   {
     std::cout << "Error: out of memory" << std::endl;
     exit(1);
   }
   else
   {
-    newNode->data = dataToEnqueue;
-    newNode->next = nullptr;
+    newNode->_data = dataToEnqueue;
+    newNode->_next = nullptr;
   }
 
   /* Enqueues the node into the queue */
 
-  if (this->head == nullptr)
+  if ( this->_head == nullptr )
   {
-    this->head = newNode;
+    this->_head = newNode;
   }
   else
   {
-    NodeQueue<T>* findEnd = this->head;
-    while (findEnd->next != nullptr) { findEnd = findEnd->next; }
-    findEnd->next = newNode;
+    NodeQueue<T> * findEnd = this->_head;
+    while ( findEnd->_next != nullptr ) { findEnd = findEnd->_next; }
+    findEnd->_next = newNode;
   }
 } /* enqueue() */
 
@@ -50,21 +69,22 @@ template <typename T> void Queue<T>::enqueue(T* dataToEnqueue)
  * queue is empty, nothing will be removed and the method will return null.
  */
 
-template <typename T> T* Queue<T>::dequeue(void)
+template <typename T>
+T * Queue<T>::dequeue( void )
 {
-  if (!isEmpty())
+  if ( !isEmpty() )
   {
     /* Push up the queue after the dequeue */
 
-    T* info = this->head->data;
-    NodeQueue<T>* temp = this->head;
-    if (temp->next == nullptr)
+    T * info = this->_head->_data;
+    NodeQueue<T> * temp = this->_head;
+    if ( temp->_next == nullptr )
     {
-      this->head = nullptr;
+      this->_head = nullptr;
     }
     else
     {
-      this->head = this->head->next;
+      this->_head = this->_head->_next;
     }
 
     /* Removes node dynamically & return info */
@@ -80,26 +100,28 @@ template <typename T> T* Queue<T>::dequeue(void)
  * boolean equivalent. True for an empty queue; False for a non-empty queue.
  */
 
-template <typename T> bool Queue<T>::isEmpty(void)
+template <typename T>
+bool Queue<T>::isEmpty( void )
 {
-  return (this->head == nullptr);
+  return ( this->_head == nullptr );
 } /* isEmpty() */
 
 /* This method will traverse the entire queue and return the queue size. If the
  * queue is empty, a 0 will be returned.
  */
 
-template <typename T> int Queue<T>::size(void)
+template <typename T>
+int Queue<T>::size( void )
 {
   /* Check if there is anything inside of the queue */
-  if (!isEmpty())
+  if ( !isEmpty() )
   {
     int n = 1;
-    NodeQueue<T>* findEnd = this->head;
-    while (findEnd->next != nullptr)
+    NodeQueue<T> * findEnd = this->_head;
+    while ( findEnd->_next != nullptr )
     {
       n += 1;
-      findEnd = findEnd->next;
+      findEnd = findEnd->_next;
     }
     return n;
   }
@@ -110,12 +132,13 @@ template <typename T> int Queue<T>::size(void)
  * dequeueing the object. If the queue is empty, return null.
  */
 
-template <typename T> T* Queue<T>::peek(void)
+template <typename T>
+T * Queue<T>::peek( void )
 {
-  if (this->head == nullptr)
+  if ( this->_head == nullptr )
   {
     return nullptr;
   }
-  return this->head->data;
+  return this->_head->_data;
 } /* peek() */
 
